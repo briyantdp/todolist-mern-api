@@ -1,0 +1,154 @@
+STANDARD API
+{rootAPI}/{version}/{grouping}/{endpoint}
+
+========================================================================================
+
+SAMPLE
+todolist-mern.com/v1/auth/login
+todolist-mern.com/v1/main/create-todo
+
+========================================================================================
+
+STANDARD STATUS RESPONSE
+200 - OK                    --> Call API success
+201 - CREATED               --> Post API success
+400 - BAD REQUEST           --> Error on client side (Input user ada yang salah / tidak valid) 
+401 - UNAUTHORIZED          --> User not authorized to the request
+403 - FORBIDDEN             --> User not allowed to access
+404 - NOT FOUND             --> Request endpoint not found
+500 - INTERNAL SERVER ERROR --> Error on sever side
+502 - BAD GATEWAY           --> Invalid response from another request
+
+========================================================================================
+
+GROUP : AUTHENTICATION
+[1] Register
+    a. Link API
+        todolist-mern.com/v1/auth/register
+    b. Request 
+        req :   
+        {
+            "fullName"  : "Bryant Dawson Priyantoro",
+            "email"     : "briyatazazel7@gmail.com",
+            "password"  : "123123"
+        }
+    c. Response
+        res :   
+        {
+            "message" : "Register success",
+            "data" :    [
+                            {
+                                "uuid"      : 1
+                                "fullName"  : "Bryant Dawson Priyantoro",
+                                "email      : "briyatazazel7@gmail.com",
+                                "password"  : "123123"
+                            }
+                        ]
+        }
+    d. Error Response
+        error-response : 
+        201 - Post register sukses
+        400 - Input yang anda masukkan tidak valid
+
+
+[2] Login
+    a. Link API
+        todolist-mern.com/v1/auth/login
+    b. Request 
+        req :   
+        {
+            "email:     : "briyatazazel7@gmail.com",
+            "password"  : "123123"
+        }
+    c. Response
+        res :   
+        {
+            "message" : "Login success",
+            "data" :    [
+                            {
+                                "email:     : "briyatazazel7@gmail.com",
+                                "password"  : "123123",
+                                "isLogin"   : true
+                            }
+                        ]
+        }
+    d. Error Response
+        error-response : 
+        201 - Post login sukses
+        400 - Input yang anda masukkan tidak valid
+
+========================================================================================
+
+GROUP : MAIN APP
+[1] Create Todolist
+    a. Link API
+        todolist-mern.com/v1/main/create-todo
+    b. Request 
+        req :   
+        {
+            "title"         : "Make a coffee",
+            "description"   : "Before i go to work, i usually make a cappucino coffee because i like a mix coffee + milk",
+        }
+    c. Response
+        res :   
+        {
+            "message" : "Create todo success",
+            "data" :    
+                            {
+                                "uuid"          : 1
+                                "title"         : "Make a coffee",
+                                "description"   : "Before i go to work, i usually make a cappucino coffee because i like a mix coffee + milk",
+                                "timeCreated"     : "06:00",
+                                "author" :  {
+                                                "uuid" : 1,
+                                                "fullName" : "Bryant Dawson"
+                                            } 
+                            }
+                        
+        }
+    d. Error Response
+        error-response : 
+        201 - Post todo sukses
+        400 - Ada kesalahan
+
+[2] Get Todolist 
+    a. Link API
+        todolist-mern.com/v1/main
+    b. Response
+        res :   
+        {
+            "message" : "Get all todolist success",
+            "data" :    [
+                            {
+                                "uuid"          : 1
+                                "title"         : "Make a coffee",
+                                "description"   : "Before i go to work, i usually make a cappucino coffee because i like a mix coffee + milk",
+                                "time"          : "06:00",
+                                "date"          : "06/03/2021"
+                            },
+                            {
+                                "uuid"          : 2
+                                "title"         : "Read a book",
+                                "description"   : "I must read a Elon Musk autobiograph",
+                                "time"          : "13:45",
+                                "date"          : "06/03/2021"
+                            },
+                            {
+                                "uuid"          : 3
+                                "title"         : "Praying",
+                                "description"   : "Praying in Istiqlal",
+                                "time"          : "15:30",
+                                "date"          : "06/03/2021"
+                            }
+                        ]
+        }
+    d. Error Response
+        error-response : 
+        200 - Get all todolist sukses
+
+
+[3] Update Todolist
+
+
+[4] Delete Todolist
+
